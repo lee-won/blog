@@ -1,0 +1,95 @@
+<%- include header %>
+
+<div id="main">
+	<div class="main-right">
+		<div id="friend">
+			<% friends.forEach(function(friend,indnx){ %>
+				<% if(friend.re_name==login_user.name) { %>
+				<dl>
+					<dt><img src="<%= friend.send_head %>"></dt>
+					<dd><%= friend.send_name %></dd>
+					<dd><%= friend.send_sex %> <%= friend.send_birth %>岁</dd>
+					<dd><span><a href="/u/<%= friend.send_name %>">访博客</a></span><span class="message" name="<%= friend.send_name %>">发私信</span></dd>
+				</dl>
+				<% }else{ %>
+					<dl>
+						<dt><img src="<%= friend.re_head %>"></dt>
+						<dd><%= friend.re_name %></dd>
+						<dd><%= friend.re_sex %> <%= friend.re_birth %>岁</dd>
+						<dd><span><a href="/u/<%= friend.re_name %>">访博客</a></span><span class="message" name="<%= friend.re_name %>">发私信</span></dd>
+					</dl>
+				<% } %>
+				
+			<% }) %>
+			<div class="clearfix"></div>
+			<div class="page_nav" style="display: block;">
+			<span> <%= friend_all %>个朋友　共<%= page_all %>页</span>
+			<a href="?p=1">首页</a>
+			<% if( !isFirstPage){ %>
+			<a href="?p=<%= page-1 %>">上一页</a>
+			<% } %>
+
+			<% if(!isLastPage) { %>
+			<a href="?p=<%= page+1 %>">下一页</a>
+			<% } %>
+			<a href="?p=<%= page_all %>">尾页</a>
+		</div>
+		</div>
+	</div>
+
+		<%- include person_left %>
+
+		<div class="clearfix"></div>
+	</div>
+	
+	
+	<div id="message-form">
+		<form method="post" action="/message">
+			<label class="re-name">收件人：<input type="text" name="re_name"  readonly="readonly" /></label>
+			<label class="re-title">标　题：<input type="text" name="title" /></label>
+			<div><span>内　容：</span><textarea name="content" rows="8" cols="45" draggable="false" ></textarea></div>
+			<input type="submit" id="mess-btn" value="发送" />
+		</form>		
+	</div>
+	<%- include footer %>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/person.css" />
+	<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+	<script type="text/javascript">
+		$(function() {
+
+			$('#type').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('.type-list').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('#type').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			$('.type-list').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			
+			$('#message-form').dialog({
+					autoOpen: false,
+					height: 300,
+					width: 500,
+					resizable: false,
+					modal: true,
+					closeText: '关闭',
+					hide:'scale'
+
+				});
+
+				$('.message').click(function() {
+					$('#message-form input[name=re_name]').val($(this).attr("name"));
+					$('#message-form').dialog('open');
+				});
+			
+
+		});
+	</script>
+	</body>
+
+	</html>

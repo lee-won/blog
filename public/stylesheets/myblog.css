@@ -1,0 +1,384 @@
+@charset "utf-8";
+
+.visitor dt{
+	position:relative;
+}
+.visitor dt a.visitor_name{
+	position:absolute;
+	top:50px;
+	left:24px;
+	width:50px;
+	display:block;
+	color:#fff;
+	font-size:12px;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+
+
+
+#header .logout{
+	float:right;
+	font-size:14px;
+}
+#header .logout li{
+	float:left;
+	height:50px;
+	line-height:50px;
+	margin:0 5px;
+}
+#header .logout li a{
+	color:#fff;
+}
+#header .logout li a:hover{
+	color:#269ABC;
+}
+#mydata{
+	margin-top:50px;
+	min-width:1200px;
+	background:url(../images/banner.jpg)no-repeat center center;
+	background-size:100%;
+	text-align:center;
+	padding:100px 0;
+}
+#mydata p{
+	color:#fff;
+	font-size:16px;
+	margin-bottom:10px;
+	text-align:center;
+}
+#mydata dl .face{
+	width:80px;
+	height:80px;
+	border-radius:40px;
+	overflow:hidden;
+	margin:0 auto;
+}
+#mydata dl .face img{
+	width:100%;
+	height:100%;
+	display: block;
+}
+#mydata dl dd{
+	font-size:14px;
+	color:#fff;
+	margin-top:2px;
+}
+#mydata #message,#mydata #friend{
+	width:70px;
+	height:20px;
+	background:#f60;
+	display:inline-block;
+	margin:2px;
+	cursor:pointer;
+}
+#mydata #message i{
+	margin-right:5px;
+}
+#mydata #friend i{
+	margin-right:5px;
+}
+.m-t-list span{
+	width:50%;
+	display:inline-block;
+	text-align:center;
+	font-size:15px;
+	margin-top:20px;
+	float:left;
+}
+.m-t-list span a{
+	color:#269ABC;
+}
+.m-t-list span a:hover{
+	color:#245269;
+}
+.panel-body .blog-list .my-a-list{
+	width:100%;
+}
+.panel-body .blog-list h3{
+	float:left;
+}
+.panel-body .blog-list .a-operate{
+	float:right;
+	color:#aaa;
+	font-size:12px;
+}
+.panel-body .blog-list .a-operate  a{
+	
+	color:#aaa;
+	cursor:pointer;
+}
+.panel-body .blog-list .a-operate  a:hover{
+	color:#269abc;
+}
+
+
+
+/* 文章详情页css */
+#a-det dd{
+	width:100%;
+	min-height:600px;
+}
+#a-det .article-title{
+	text-align:center;
+	font-size:24px;
+	color:#666;
+	float:none;
+}
+#a-det .a-type{
+	font-size:12px;
+	color:#aaa;
+	float:left;
+	margin-top:10px;
+}
+#a-det .a-type a{
+	color:inherit;
+}
+#a-det .a-type a:hover{
+	color:#269ABC;
+}
+#a-det .a-operate{
+	float:right;
+	font-size:12px;
+	color:#aaa;
+	margin-top:10px;
+}
+#a-det .a-operate a{
+	color:inherit;
+	display:inline-block;
+}
+#a-det .a-operate a:hover{
+	color:#269ABC;
+}
+#a-det #a-con{
+	margin:20px 0;
+}
+#a-con img{
+	max-width:100%;
+}
+#a-det .article-operate #time{
+	font-size:12px;
+	float:left;
+}
+.a-prev{
+	float:left;
+	font-size:14px;
+	margin:20px 0;
+}
+.a-next{
+	float:right;
+	font-size:14px;
+	margin:20px 0;
+}
+.a-prev a,.a-next a{
+	color:inherit;
+}
+.a-prev a:hover,.a-next a:hover{
+	text-decoration:underline;
+	color:#269ABC;
+}
+#nice{
+	cursor:pointer;
+}
+.panel-body dl.comment{
+	margin-top:10px;
+	background:#f5f5f5;
+	padding:10px;
+}
+.panel-body dl.comment dt{
+	width:40px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+}
+.panel-body dl.comment dt img{
+	width:40px;
+	height:40px;
+	display:block;
+}
+.panel-body dl.comment dd {
+	width:720px;
+	display:block;
+	float:right;
+}
+.panel-body dl.comment dd div.name_comm .name{
+	font-size:14px;
+	color:#269ABC;
+	float:left;
+}
+.panel-body dl.comment dd div.name_comm  p{
+	font-size:14px;
+	color:#333;
+	text-indent:5px;
+	margin-right:20px;
+	float:left;
+}
+.panel-body dl.comment dd div.name_comm a.com_del{
+	cursor:pointer;
+	color:#269ABC;
+	display:none;
+}
+.panel-body dl.comment dd div.name_comm a.com_del i{
+	font-size:14px;
+	cursor:pointer;
+	color:#269ABC;
+	position:relative;
+	top:2px;
+	float:left;
+}
+.panel-body dl.comment dd div.time_comm .time{
+	font-size:12px;
+	color:#aaa;
+	margin-right:20px;
+	float:left;
+	display:block;
+}
+.panel-body dl.comment dd div.time_comm i{
+	font-size:14px;
+	cursor:pointer;
+	color:#269ABC;
+	display:none;
+	position:relative;
+	top:2px;
+	float:left;
+}
+.panel-body dl.comment dd div.second_com{
+	margin-top:10px;
+	display:block;
+}
+.panel-body dl.comment dd div.second_com span.sc_face{
+	width:40px;
+	height:40px;
+	float:left;
+	margin-right:20px;
+}
+.panel-body dl.comment dd div.second_com span.sc_face img{
+	width:40px;
+	height:40px;
+	display:block;
+}
+.panel-body dl.comment dd div.second_com div.second_com_con{
+	width:660px;
+	float:right;
+}
+#reply_container{
+	width:inherit;
+	
+}
+
+#comment-form{
+	margin-top:20px;
+}
+#comment-btn{
+	width:80px;
+	height:35px;
+	text-align:center;
+	line-height:35px;
+	background:#269abc;
+	color:#fff;
+	border:none;
+	margin-top:10px;
+	cursor:pointer;
+}
+#comment-btn:hover{
+	background:#245269;
+}
+#reply-btn{
+	cursor:pointer;
+}
+
+#num_page{
+	text-align:center;
+	margin-top:20px;
+}
+#num_page ul{
+	display:inline-block;
+}
+#num_page ul li{
+	float:left;
+	height:16px;
+	width:16px;
+	border:1px solid #eee;
+	line-height:16px;
+	text-align: center;
+	margin:0 2px;
+}
+#num_page ul li a{
+	display: block;
+	color:#666;
+}
+#num_page ul li a:hover{
+	background:#269ABC;
+	color:#fff;
+}
+#num_page ul li a.active{
+	background:#269ABC;
+	color:#fff;
+}
+
+/*发件框*/
+.ui-draggable .ui-dialog-titlebar{
+	background: transparent;
+	border:none;
+	margin:0;
+	padding:0;
+}
+
+#message-form,#friendapply-form{
+	overflow:none;
+	padding:0 40px;
+}
+#message-form form label,#friendapply-form form label{
+	display:block;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	font-family: "微软雅黑";
+}
+#message-form form label.re-name input,#friendapply-form label.re-name input{
+	border:none;
+	height:30px;
+}
+#message-form form label.re-title input{
+	height:24px;
+	width:340px;
+	outline:none;
+	padding-left:10px;
+}
+#message-form form  div,#friendapply-form form  div{
+	font-size:14px;
+	font-family: "微软雅黑";
+	margin-top:10px;
+	
+}
+#message-form form  div textarea,#friendapply-form form  div textarea{
+	resize: none;
+	padding:10px;
+	letter-spacing:1px;
+	font-size:14px;
+}
+#message-form form  div span,#friendapply-form form  div span{
+	vertical-align:top;
+	display:inline-block;
+}
+#mess-btn{
+	width:80px;
+	height:30px;
+	background:#269ABC;
+	border:none;
+	color:#fff;
+	font-size:14px;
+	margin-left:55px;
+	cursor: pointer;
+}
+#apply-btn{
+	width:80px;
+	height:30px;
+	background:#269ABC;
+	border:none;
+	color:#fff;
+	font-size:14px;
+	cursor: pointer;
+}

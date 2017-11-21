@@ -1,0 +1,296 @@
+@charset "utf-8";
+*{
+	padding:0;
+	margin:0;
+}
+.clearfix{
+	content: '.';
+	visibility: visible;
+	height:0;
+	clear:both;
+}
+@font-face {
+	font-family: "iconfont";
+	src: url('../../fonts/iconfont.eot');
+	/* IE9*/
+	src: url('../../fonts/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+	url('../../fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+	url('../../fonts/iconfont.svg#iconfont') format('svg');
+	/* iOS 4.1- */
+}
+
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	-moz-osx-font-smoothing: grayscale;
+}
+header{
+	height:50px;
+	background:#000;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:9999;
+}
+#header{
+	max-width:1200px;
+	margin:0 auto;
+	color:#fff;
+	position:relative;
+}
+#header .web-n{
+	height:50px;
+	line-height:50px;
+	font-size:32px;
+	font-family:"微软雅黑";
+	float:left;
+	color:#fff;
+	text-decoration:none;
+}
+
+#header .reg-log {
+	list-style:none;
+	float:right;
+}
+#header .reg-log li{
+	float:right;
+	height:50px;
+	line-height:50px;
+	margin:0 5px;
+}
+#header .reg-log li a{
+	text-decoration:none;
+	display:block;
+	color:#fff;
+	font-size:14px;
+}
+#header .reg-log li a:hover{
+	color:#269ABC;
+}
+
+#header .reg-log li a.active{
+	color:#269ABC;
+}
+
+#reg{
+	margin-top:100px;
+	margin-bottom:50px;
+	min-height:200px;
+	text-align:center;
+	font-family: "宋体";
+	font-weight:normal;
+}
+#reg h2{
+	font-size: 20px;
+    font-weight: normal;
+    font-family: "微软雅黑";
+}
+#reg div.info{
+	font-family: "微软雅黑";
+	border-bottom:1px solid #ccc;
+	width:50%;
+	margin:20px auto;
+	text-align:right;
+	font-size:14px;
+}
+#reg div.info a{
+	text-decoration:none;
+}
+#reg form label,#login form label{
+	position:relative;
+	display:inline-block;
+}
+form label input{
+	width:300px;
+	height:40px;
+	padding:0 10px;
+	font-weight:normal;
+	font-size:14px;
+	border:1px solid #aaa;
+}
+form label .check-true{
+	display:inline-block;
+	position:absolute;
+	right:5px;
+	height:40px;
+	line-height:40px;
+	color:#f60;
+	
+}
+form p.info{
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	text-align:left;
+	width:300px;
+	font-size:14px;
+}
+form p.error{
+	color:red;
+}
+#submit{
+	width:324px;
+	background:#269ABC;
+	color:#fff;
+	border:none;
+	height:40px;
+	line-height:40px;
+	outline:none;
+	display:inline-block;
+	margin:0 auto;
+}
+#submit:hover{
+	background:#007FFF;
+	cursor:pointer;
+}
+ form div.state-info{
+	width:324px;
+	margin:0 auto;
+	font-family: "微软雅黑";
+	margin-bottom:30px;
+}
+ form div.state-info label{
+	display:inline-block;
+	float:left;
+}
+ form div.state-info label input{
+	height:16px;
+	width:16px;
+	float:left;
+	border:1px solid #aaa;
+}
+ form div.state-info label span{
+	display:inline-block;
+	font-weight:normal;
+	padding-left:5px;
+	cursor:pointer;
+	font-size:14px;
+	position:relative;
+	top:-4px;
+}
+#reg #deal:hover{
+	color:#269ABC;
+}
+form div.state-info .deal{
+	color:#999;
+	float:right;
+	font-size:14px;
+}
+#get-code{
+	 position:absolute;
+	 right:0px;
+	 height:42px;
+	 width:100px !important;
+	 cursor:pointer;
+}
+#sex{
+	height:16px;
+	line-height:16px;
+	font-size:16px;
+	font-family:"微软雅黑";
+	text-align:left;
+	width:300px;
+	margin:0 auto;
+	margin-bottom:30px;
+	padding:0;
+	
+}
+#sex .sex-l{
+	margin-left:20px;
+	font-weight:normal !important;
+}
+#sex .sex{
+	width:16px !important;
+	height:16px !important;
+	padding:0;
+	position:relative;
+	top:2px;
+}
+
+/*登录*/
+#login{
+	margin-top:100px;
+	margin-bottom:50px;
+	min-height:200px;
+	text-align:center;
+	font-family: "宋体";
+	font-weight:normal;
+}
+#login h2{
+	font-size: 20px;
+    font-weight: normal;
+    font-family: "微软雅黑";
+    border-bottom: 1px solid #ccc;
+    width:50%;
+    margin:0 auto;
+    padding-bottom:10px;
+    margin-bottom:50px;
+}
+
+#login form div.state-info .deal a{
+	cursor:pointer;
+	color:#269ABC;
+	text-decoration:none;
+}
+#login form div.state-info .deal:hover{
+	color:#007FFF;
+}
+#other-login{
+	width:300px;
+	margin:0 auto;
+	margin-top:10px;
+	height:40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+#other-login span{
+	float:left;
+	display:block;
+	line-height:40px;
+	margin:0 20px;
+	color:#000;
+}
+#other-login ul{
+	list-style:none;
+}
+#other-login ul li i{
+	list-style:none;
+	float:left;
+	margin:0 10px;
+	font-size:25px;
+	line-height:40px;
+	color:#666;
+}
+#other-login ul li i:hover{
+	color:#269ABC;
+}
+#other-login .create{
+	font-size:14px;
+	margin-top:20px;
+}
+#other-login .create a{
+	color:#269ABC;
+	text-decoration:none;
+}
+#other-login .create a:hover{
+	color:#007FFF;
+}
+.beian{
+	text-align:center;
+	background:#000;
+	height:30px;
+	line-height:
+	30px;color:#eee;
+	width:100%;
+	margin-top:20px;
+	font-size:14px;
+	font-family: "微软雅黑";
+}
+.log-f{
+	position:fixed;
+	bottom:0;
+}

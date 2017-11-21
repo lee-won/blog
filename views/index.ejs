@@ -1,0 +1,192 @@
+<%- include header %>
+		<div class="banner"></div>
+		<div id="main">
+			<div class="main-right">
+				<div class="panel">
+					<div class="panel-header">
+						<h3 class="panel-title">博文列表</h3>
+						<ul class="sort">
+							<li>排序方式：</li>
+							
+							<li>
+								<% if(sort=='time') { %>
+									<a href="?sort=time" class="active">时间</a>
+								<% }else { %>
+									<a href="?sort=time">时间</a>
+								<% } %>
+							</li>
+							<li>
+								<% if(sort=='pv') { %>
+									<a href="?sort=pv" class="active">浏览量</a>
+								<% }else { %>
+									<a href="?sort=pv">浏览量</a>
+								<% } %>
+							</li>
+							<li>
+								<% if(sort=='comments') { %>
+									<a href="?sort=comments" class="active">评论量</a>
+								<% }else { %>
+									<a href="?sort=comments">评论量</a>
+								<% } %>
+							</li>
+						</ul>
+					</div>
+					<div class="panel-body">
+					<% posts.forEach(function(post,index){ %>
+						<dl class="blog-list">
+							<dt>
+								
+							
+								<a href="/u/<%= post.name %>"><img src="<%= post.head %>" class="head"></a>
+                      	  	
+                      	  	
+                      	  		<a href="/u/<%= post.name %>" class="name"><%= post.name %></a>
+                    		</dt>
+							<dd class="index_dd">
+								<h3>
+									<% if(post.reprint_info.reprint_from) { %>
+										<a href="/u/<%= post.name%>/<%= post._id %>" target="_blank"><span class="zhuan">转</span> <%= post.title %></a>
+									<% } else { %>
+										<a href="/u/<%= post.name%>/<%= post._id %>" target="_blank"><%= post.title %></a>
+									<% } %>
+									
+								</h3>
+								<div class="clearfix"></div>
+								<div class="article-info">
+									<span>发表时间：<%= post.time.minute %></span>
+									<ul class="bq">
+										<li>
+											类型：<a href="###"><%= post.type %></a>
+										</li>
+				
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="post-sub"><%- post.post %></div>
+
+							</dd>
+							<div class="article-operate">
+								<ul>
+									<li title="浏览量"><i class="iconfont">&#xe7f7;</i><span>(<%= post.pv %>)</span></li>
+									<li title="评论量"><i class="iconfont">&#xe600;</i><span>(<%= post.comments %>)</span></li>
+									<li title="赞"><i class="iconfont">&#xe623;</i><span>(<%= post.nice.length %>)</span></li>
+									<li title="转发量"><i class="iconfont">&#xe601;</i><span>(<% if(post.reprint_info.reprint_to){ %><%= post.reprint_info.reprint_to.length %><% } else { %>0<% } %>)</span></li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</dl>
+						<% }) %>
+					</div>
+					<% include paging %>
+				</div>
+				
+				
+				<div class="panel" name="post-edit" id="post-edit">
+					<div class="panel-header">
+						<h3 class="panel-title">发帖区</h3>
+					</div>
+					<div class="panel-body">
+					<% if (success) { %>
+					<div><%= success %></div>
+					<% } %>
+					<% if (error) {%>
+						<script>alert('请先登录')</script>
+					<% } %>
+					<form id="pub-form"  method="post">
+						<label class="tit-l">文章标题：<input type="text" id="a-title" name="title" /></label>
+						<label class="type-l">文章类型：<select name="type" id="a-type"> 
+							<option value="移动开发">移动开发</option> 
+							<option value="web前端">web前端</option> 
+							<option value="架构设计">架构设计</option> 
+							<option value="编程语言">编程语言</option> 
+							<option value="互联网">互联网</option>
+							<option value="数据库">数据库</option> 
+							<option value="系统运维">系统运维</option> 
+							<option value="云计算">云计算</option> 
+						</select> </label>
+						<input type="hidden" id="a-content" name="post" />
+						<div class="clearfix"></div>
+						<!-- 加载编辑器的容器 -->
+						<script id="editor" name="content" type="text/plain">
+						
+						</script>
+						<input id="pub-btn" type="submit" value="发表" />
+					</form>
+				
+					</div>
+				</div>
+			</div>
+
+			<%- include index_left %>
+		</div>
+		<%- include footer %>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/calendar.css" />
+		
+		<script type="text/javascript" src="/javascripts/basic.js"></script>	
+		<script type="text/javascript">
+		$(function(){
+			
+			
+			
+			
+		
+			$('#date').datepicker('show');
+			$('#date').datepicker({
+				dateFormat: 'yy-mm-dd',
+				dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+				monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一 月', '十二月'],
+				showMonthAfterYear: true,
+				maxDate: 0,
+				selectOtherMonths: true,
+			});
+
+			
+			
+			var ue = UE.getEditor('editor');  
+			
+			$('#pub-btn').click(function(){
+				$('#a-content').val(ue.getContent());
+				if($('#a-title').val() && $('#a-type').val() && $('#a-content').val()){
+					$('pub-form').submit()
+				}else{
+					alert('亲，存在未填！');
+					return false;
+				}
+			});
+			
+			for(var i=0;i<$('.post-sub').length;i++){
+				$('.post-sub').eq(i).html($('.post-sub').eq(i).text().substring(0,100)+'...');
+			}
+
+			$('#head-more').click(function(){
+				
+				$.ajax({
+					type:"post",
+					url:"/moreHead",
+					async:true,
+					data:{
+						headPage:parseInt($('#head-more').attr('headPage'))+1
+					},
+					success:function(res,status,xhr){
+						if(!res){
+							var str='';
+						
+							$('#head-more').attr('headPage',res.pop());
+							res.forEach(function(user,index){
+							str+='<dl class="expert_list"><dt><a href="/u/'+user.name+'"target="_blank"><img src="'+ user.head +'" alt="img"></a></dt><dd><a href="/u/'+user.name+'" target="_blank" class="expert_t">'+user.name+'</a></dd></dl>'
+							});
+							$('#headContent').html(str);
+						}
+						
+						
+					}
+				});
+				
+			})
+			
+		});
+		</script>
+	</body>
+
+</html>

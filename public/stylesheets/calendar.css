@@ -1,0 +1,40 @@
+@charset "utf-8";
+.ui-corner-all {
+	background: #fff;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: none;
+	color: #428bca;
+	margin-bottom: 20px;
+}
+
+.ui-datepicker-header {
+	background:#269ABC;
+	width: 100%;
+	height: 40px !important;
+	line-height: 40px !important;
+	color: #fff;
+	vertical-align: middle;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ui-datepicker-title {
+	height: 40px !important;
+	line-height: 40px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+	background: none;
+	margin-top:2px;
+}
+
+.ui-widget-header .ui-icon {
+	background-image: url(../css/smoothness/images/ui-icons_cd0a0a_256x240.png);
+}

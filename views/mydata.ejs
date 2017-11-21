@@ -1,0 +1,36 @@
+<div id="mydata">
+	<dl>
+
+		<dt class="face"><img src="<%= user.head %>"></dt>
+		<p>
+			<%= user.name %>
+		</p>
+		<dd><% if(user.sex == '男') { %>
+			<i class="iconfont">&#xe611;</i>
+		<% } else { %>
+			<i class="iconfont">&#xe7b2;</i>
+		<% } %><span id="age"><%= age %></span>岁</dd>
+		<% if(login_user && user.name != login_user.name){ %>
+			<dd><span id="message"><i class="iconfont">&#xe658;</i>发私信</span><span id="friend"><i class="iconfont">&#xe6a5;</i>加好友</span></dd>
+		<% } %>
+	</dl>
+</div>
+
+<div id="message-form">
+	<form method="post" action="/message">
+		<label class="re-name">收件人：<input type="text" name="re_name" value="<%= user.name %>" readonly="readonly" /></label>
+		<label class="re-title">标　题：<input type="text" name="title" /></label>
+		<div><span>内　容：</span><textarea name="content" rows="8" cols="45" draggable="false" ></textarea></div>
+		<input type="submit" id="mess-btn" value="发送" />
+	</form>		
+</div>
+<div id="friendapply-form">
+	<form method="post" action="/friend">
+		<label class="re-name">TO：<input type="text" name="re_name" value="<%= user.name %>" readonly="readonly" /></label>
+		<div><span>请输入验证信息：</span><textarea name="content" rows="8" cols="45" draggable="false" placeholder="我是..." ></textarea></div>
+		<input type="hidden" name="re_head" value="<%= user.head %>"  />
+		<input type="hidden" name="re_sex" value="<%= user.sex %>"  />
+		<input type="hidden" name="re_birth" value="<%= user.birth %>"  />
+		<input type="submit" id="apply-btn" value="发送" />
+	</form>		
+</div>

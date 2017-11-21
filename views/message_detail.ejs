@@ -1,0 +1,70 @@
+<%- include header %>
+
+<div id="main">
+	<div class="main-right">
+		<div class="mess-con">
+			<h3><%= message.title %></h3>
+			<img src="<%= message.send_head %>">
+			<ul>
+				<% if(login_user.name==message.send_name){ %>
+					<li>收件人：<%= message.re_name %></li>
+				<% } %>
+				<% if(login_user.name==message.re_name){ %>
+					<li>发件人：<%= message.send_name %></li>
+				<% } %>
+				<li>时　间：<%= message.time.minute %></li>
+			</ul>
+			<div class="clearfix"></div>
+			<p><%= message.content %></p>
+			<div class="mess-oper">
+				<% if(login_user.name==message.re_name){ %>
+					<span id="mess-reply">回复</span> | <span><a href="###">删除</a></span>
+				<% } %>
+				<% if(login_user.name==message.send_name){ %>
+					<span><a href="###">删除</a></span>
+				<% } %>
+			</div>
+		</div>
+		<form id="reply_form" method="post" action="">
+			<label>回复：<input type="text" name="re_name" value="<%= message.send_name %>" readonly="readonly" /></label>
+			<input type="hidden" name="title" value="<%= message.title %>"  />
+			<textarea name="content" rows="10" cols="90"></textarea>
+			<input id="re-btn" type="submit" value="回复"  />
+		</form>
+		
+	</div>
+
+	<%- include person_left %>
+	
+	<div class="clearfix"></div>
+</div>
+
+<%- include footer %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/person.css" />
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+			$('#type').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('.type-list').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('#type').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			$('.type-list').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			
+			$('#mess-reply').click(function(){
+				$('#reply_form').css('display','block');
+			});
+			
+	});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>注册</title>
+
+		<link rel="stylesheet" href="/stylesheets/smoothness/jquery.ui.css">
+		<link rel="stylesheet" href="/stylesheets/reg-login.css" />
+	</head>
+
+	<body>
+
+		<header>
+			<div id="header">
+				<a href="/" class="web-n"><img style="vertical-align:middle;border:none;" src="/images/logo.jpg"></a>
+
+				<ul class="reg-log">
+					<li>
+						<a href="/login">登录</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a class="active">注册</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div id="reg">
+			<h2>注册博客账号</h2>
+			<div class="info">我已有账号！
+				<a href="/login">立即登录。</a>
+			</div>
+			<form id="reg-form" method="post">
+				<label><input type="text" id="user" name="username" placeholder="请输入您的用户名" /><div class="check-true" ></div></label>
+				<p class="info" id="user-info"></p>
+				<label><input type="password" name="pass" id="pass" placeholder="请输入您密码" /><div class="check-true" ></div></label>
+				<p class="info" id="pass-info"></p>
+				<label><input type="password" name="notpass" id="notpass" placeholder="请您再次输入密码" /><div class="check-true" ></div></label>
+				<p class="info" id="notpass-info"></p>
+				<label><input type="text" id="email" name="email" placeholder="请输入您的邮箱" /><div class="check-true" ></div></label>
+				<p class="info" id="email-info"></p>
+				<label><input type="text" id="birth" name="birth" placeholder="请输入您的出生日期" readonly="readonly" /><div class="check-true" ></div></label>
+				<p class="info" id="birth-info"></p>
+				<div id="sex">
+					性别：
+					<label class="sex-l"><input class="sex" type="radio" name="sex" value="女" checked="checked" />女</label>
+					<label class="sex-l"><input class="sex" type="radio" name="sex" value="男" />男</label>
+				</div>
+				<label><input type="text" name="phone" id="phone" placeholder="请输入您的手机号" /><div class="check-true" ></div></label>
+				<p class="info" id="phone-info"></p>
+				<label><input type="text" name="code" id="code" placeholder="请输入您的短信验证码" /><input type="button" id="get-code"  value="获取验证码"></label>
+				<p class="info" id="code-info"></p>
+				<div class="state-info">
+					<label><input id="read" type="checkbox" name="read" value="1" class="state" />
+					<span id="deal">点击阅读注册协议</span></label>
+					<span class="deal">请阅读协议</span>
+					<div class="clearfix"></div>
+				</div>
+				<label><input type="submit" value="注册" id="submit" /></label>
+			</form>
+			<% if(error) {%>
+			<%- error %>
+			<% } %>
+			<% if(success) {%>
+			<%- success %>
+			<% } %>
+
+		</div>
+		<div id="deal-info">
+			<h2>思学博客用户注册须知</h2>
+			<p>
+				感谢您注册思学博客！本博客目前正处于测试阶段，请勿在博客中透露您的个人重要隐私信息，如果您的数据信息
+				在博客系统中丢失，我们不承担任何责任，敬请原谅！
+			</p>
+			
+		</div>
+		<div class="beian"> Copyright © 2003-2016 <span>蜀ICP备11025334号</span></div>
+		<script src="/javascripts/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+		<script type="text/javascript" src="/javascripts/check.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#user').blur(function() {
+					checkUser($('#user'), $('#user-info'));
+				})
+				$('#pass').blur(function() {
+					checkPass($('#pass'), $('#pass-info'));
+				})
+				$('#notpass').blur(function() {
+					checkNotpass($('#notpass'), $('#notpass-info'));
+				})
+				$('#email').blur(function() {
+					checkEmail($('#email'), $('#email-info'));
+				})
+				$('#phone').blur(function() {
+					checkPhone($('#phone'), $('#phone-info'));
+				})
+
+				var Code = '';
+				$('#submit').click(function() {
+					checkUser($('#user'), $('#user-info'));
+					checkPass($('#pass'), $('#pass-info'));
+					checkNotpass($('#notpass'), $('#notpass-info'));
+					checkEmail($('#email'), $('#email-info'));
+					checkPhone($('#phone'), $('#phone-info'));
+					if($('#code').val() == '') {
+						alert('请输入验证码！');
+						return false;
+					} else if($('#reg .error').length == 0 && $('#birth').val() != '' && $('#read').is(':checked')) {
+
+					} else {
+						alert('注册信息有误！');
+						return false;
+					}
+				})
+
+				$("#get-code").click(function() {
+					if($('#phone').parent().children().eq(1).html() == '') {
+
+						alert('请先输入正确的手机号');
+						return false;
+					} else {
+						$.ajax({
+							type: "post",
+							url: "/reg/getCode",
+							async: true,
+							data: {
+								name: $('#user').val(),
+								phone: $('#phone').val()
+							},
+							success: function(res, status, xhr) {
+								if(res) {
+										$('#phone').attr("readonly","readonly");
+										$('#email').attr("readonly","readonly");
+										$("#get-code").attr("disabled", "disabled");
+										var s = 60;
+										$("#get-code").val(s + '秒');
+										var t = setInterval(function() {
+											s--;
+											$("#get-code").val(s + '秒');
+											if(s == 0) {
+												clearInterval(t);
+												$("#get-code").val('重新获取');
+												$("#get-code").attr("disabled", false);
+											}
+										}, 1000)
+
+								}
+							}
+						});
+
+					};
+				});
+
+				$('#birth').datepicker({
+					dateFormat: 'yy-mm-dd',
+					showMonthAfterYear: true,
+					dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+					monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一 月', '十二月'],
+					changeYear: true,
+					changeMonth: true,
+					yearRange: '1950:2020',
+					maxDate: 0
+				});
+
+				$('#deal-info').dialog({
+					title: '请认真阅读以下内容',
+					autoOpen: false,
+					height: 500,
+					width: 500,
+					resizable: false,
+					modal: true,
+					closeText: '关闭'
+				});
+
+				$('#deal').click(function() {
+					$('#deal-info').dialog('open');
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

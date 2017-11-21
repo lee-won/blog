@@ -1,0 +1,105 @@
+<div class="main-left">
+	<div class="panel">
+		<div class="panel-header">
+			<h3 class="panel-title">博文分类</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="m-t-list">
+				<% types.forEach(function(type,index){ %>
+				<li>
+					<span><a href="/u/<%= user.name %>/t/<%= type.type %>"><%= type.type %>(<%= type.count %>)</a></span>
+				</li>
+				<% }) %>
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-header">
+			<h3 class="panel-title">最近访客</h3>
+		</div>
+		<div class="panel-body visitors">
+			<% tours.forEach(function(tour,index){ %>
+			<dl class="expert_list visitor">
+				<dt>
+							<a href="/u/<%= tour.name %>"><img src="<%= tour.head %>" alt="img"></a>
+							<a class="visitor_name" href="/u/<%= tour.name %>" target="_blank" class="expert_t"><%= tour.name %></a>
+						</dt>
+				<dd>
+					<a class="expert_t">
+						<%= tour.time.day %>
+					</a>
+				</dd>
+			</dl>
+			<% }); %>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="panel-header">
+			<h3 class="panel-title">文章存档</h3>
+		</div>
+		<div class="panel-body archives">
+			<ul class="list">
+				<% archives.forEach(function(archive,index){ %>
+				<li>
+					<a href="/archive/<%=user.name%>/<%= archive.time %>">
+						<%= archive.time %>
+					</a><span>共<%= archive.count %>篇</span>
+				</li>
+				<% }) %>
+			</ul>
+		</div>
+	</div>
+
+	<div id="adver">
+		<div id="big">
+			<div class="slide" style="opacity:1;"><img src="/images/adv/adv1.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv2.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv3.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv4.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv5.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv6.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv7.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv8.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv9.jpg"></div>
+			<div id="adv-info">web前端开发</div>
+		</div>
+
+		<div id="thumb">
+			<ul>
+				<li style="border-color: red;">
+					<img src="/images/adv/adv1.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv2.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv3.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv4.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv5.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv6.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv7.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv8.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv9.jpg">
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+<div class="clearfix"></div>

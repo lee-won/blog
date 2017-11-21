@@ -1,0 +1,109 @@
+<%- include header %>
+
+<div id="main">
+	<div class="main-right">
+		<form method="post" action="/remove/message">
+			<table>
+				<tr>
+					<th style="width:50px;"></th>
+					<th style="width:50px;">状态</th>
+					<th style="width:100px;">发件人</th>
+					<th style="width:350px;">主题内容</th>
+					<th style="width:100px;">时间</th>
+					<th style="width:100px;">操作</th>
+				</tr>
+				<% messages.forEach(function(message,index){ %>
+				<tr>
+					<td style="width:50px;"><input type="checkbox" name="id" value="<%= message._id %>" /></td>
+					<td style="width:50px;">
+						<% if(message.state){ %>
+						<span class="state-ok" title="已读"></span>
+						<% }else{ %>
+						<span class="state-no" title="未读"></span>
+						<% } %>
+					</td>
+					<td style="width:100px;">
+						<%= message.send_name %>
+					</td>
+					<td style="width:350px;">
+						<a href="/message_detail/<%= message._id %>" class="mess-tit">
+							<%= message.title %><span class="mess-c"> —— <%= message.content %></span></a>
+					</td>
+					<td style="width:100px;">
+						<%= message.time.day %>
+					</td>
+					<td style="width:100px;">
+						<a class="box-a" href="/message_detail/<%= message._id %>">查看</a> |
+						<a class="box-a" href="/remove_message/<%= message._id %>">删除</a>
+					</td>
+				</tr>
+				<% }) %>
+			</table>
+			<div class="oper-btn">
+				<ul>
+					<li id="selectAll">全选</li>
+					<li id="unSelect">不选</li>
+					<li id="reverse">反选</li>
+				</ul>
+				<input type="submit" value="批量删除" />
+				<div class="clearfix"> </div>
+			</div>
+		</form>
+		<div class="page_nav" style="display: block;">
+			<span> <%= message_all %>条　共<%= page_all %>页</span>
+			<a href="?p=1">首页</a>
+			<% if( !isFirstPage){ %>
+			<a href="?p=<%= page-1 %>">上一页</a>
+			<% } %>
+
+			<% if(!isLastPage) { %>
+			<a href="?p=<%= page+1 %>">下一页</a>
+			<% } %>
+			<a href="?p=<%= page_all %>">尾页</a>
+		</div>
+	</div>
+
+	<%- include person_left %>
+
+	<div class="clearfix"></div>
+</div>
+
+<%- include footer %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/person.css" />
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$('#type').mouseover(function() {
+			$('.type-list').css('display', 'block')
+		})
+		$('.type-list').mouseover(function() {
+			$('.type-list').css('display', 'block')
+		})
+		$('#type').mouseout(function() {
+			$('.type-list').css('display', 'none')
+		})
+		$('.type-list').mouseout(function() {
+			$('.type-list').css('display', 'none')
+		})
+
+		$("#selectAll").click(function() { //全选  
+			$(".main-right form :checkbox").attr("checked", true);
+		});
+
+		$("#unSelect").click(function() { //全不选  
+			$(".main-right form :checkbox").attr("checked", false);
+		});
+
+		$("#reverse").click(function() { //反选  
+			$(".main-right form :checkbox").each(function() {
+				$(this).attr("checked", !$(this).attr("checked"));
+			});
+		});
+
+	});
+</script>
+</body>
+
+</html>

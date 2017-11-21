@@ -1,0 +1,134 @@
+<%- include header %>
+<%- include mydata %>
+<div id="main">
+	<div class="main-right">
+		<div class="panel">
+			<div class="panel-header">
+				<h3 class="panel-title">博文列表--<span style="font-size:14px;"><%= type %></span></h3>
+				<ul class="sort">
+					<li>排序方式：</li>
+					<li>
+						<% if(sort=='time') { %>
+							<a href="?sort=time" class="active">时间</a>
+						<% }else { %>
+							<a href="?sort=time">时间</a>
+						<% } %>
+					</li>
+					<li>
+						<% if(sort=='pv') { %>
+							<a href="?sort=pv" class="active">浏览量</a>
+						<% }else { %>
+							<a href="?sort=pv">浏览量</a>
+						<% } %>
+					</li>
+					<li>
+						<% if(sort=='comments') { %>
+							<a href="?sort=comments" class="active">评论量</a>
+						<% }else { %>
+							<a href="?sort=comments">评论量</a>
+						<% } %>
+					</li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<% posts.forEach(function(post,index){ %>
+				<dl class="blog-list">
+					<dd class="my-a-list">
+						<h3>
+							<% if(post.reprint_info.reprint_from) { %>
+										<a href="/u/<%= post.name%>/<%= post._id %>" target="_blank"><span class="zhuan">转</span><%= post.title %></a>
+									<% } else { %>
+										<a href="/u/<%= post.name%>/<%= post._id %>" target="_blank"><%= post.title %></a>
+									<% } %>
+						</h3>
+						<% if(login_user && (login_user.name == post.name )) { %>
+						<div class="a-operate">
+							[<% if (post.reprint_info.reprint_from) { %>
+									转载-<a  href="/u/<%= post.reprint_info.reprint_from.name %>/<%= post.reprint_info.reprint_from.day %>/<%= post.reprint_info.reprint_from.title %>">原文链接</a>
+								<% } else { %>
+									<a  href="/edit/<%= post.name %>/<%= post._id %>">编辑</a>
+								<% } %>]
+							[<a id="delete" href="/remove/<%= post.name %>/<%= post._id %>">删除</a>]
+						</div>
+						<% } %>
+						<div class="clearfix"></div>
+						<div class="article-info">
+							<span>发表时间：<%= post.time.minute %></span>
+							<ul class="bq">
+								<li>
+										类型：<a href="###"><%= post.type %></a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="post-sub"><%- post.post %></div>
+
+					</dd>
+					<div class="article-operate">
+						<ul>
+							<li title="浏览量"><i class="iconfont">&#xe7f7;</i><span>(<%= post.pv %>)</span></li>
+							<li title="评论量"><i class="iconfont">&#xe600;</i><span>(<%= post.comments %>)</span></li>
+							<li title="赞"><i class="iconfont">&#xe623;</i><span>(<%= post.nice.length %>)</span></li>
+							<li title="转发量"><i class="iconfont">&#xe601;</i><span>(<% if(post.reprint_info.reprint_to){ %><%= post.reprint_info.reprint_to.length %><% } else { %>0<% } %>)</span></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</dl>
+				<% }) %>
+			</div>
+			<% include paging %>
+		</div>
+
+		<div class="panel"  name="post-edit" id="post-edit">
+			<div class="panel-header">
+				<h3 class="panel-title">发帖区</h3>
+			</div>
+			<div class="panel-body">
+				<% if (success) { %>
+				<div>
+					<%- success %>
+				</div>
+				<% } %>
+				<% if (error) {%>
+				<script>
+					alert('请先登录')
+				</script>
+				<% } %>
+				<form id="pub-form" method="post" action="/">
+					<label class="tit-l">文章标题：<input type="text" id="a-title" name="title" /></label>
+					<label class="type-l">文章类型：<select name="type" id="a-type"> 
+							<option value="移动开发">移动开发</option> 
+							<option value="web前端">web前端</option> 
+							<option value="架构设计">架构设计</option> 
+							<option value="编程语言">编程语言</option> 
+							<option value="互联网">互联网</option>
+							<option value="数据库">数据库</option> 
+							<option value="系统运维">系统运维</option> 
+							<option value="云计算">云计算</option> 
+						</select> </label>
+					<input type="hidden" id="a-content" name="post" />
+					<div class="clearfix"></div>
+
+					<script id="editor" name="content" type="text/plain">
+						
+					</script>
+					<input id="pub-btn" type="submit" value="发表" />
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+	<%- include myblog_left %>
+</div>
+
+<%- include footer %>
+
+<script type="text/javascript" src="/javascripts/basic.js"></script>	
+<script type="text/javascript" src="/javascripts/myblog.js"></script>
+
+</body>
+
+</html>

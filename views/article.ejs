@@ -1,0 +1,349 @@
+<%- include header %>
+<%- include mydata %>
+<div id="main">
+	<div class="main-right">
+		<div class="panel">
+			<div class="panel-header">
+				<h3 class="panel-title">博文详情</h3>
+			</div>
+			<div class="panel-body" id="a-det" commentPage="1" article_id="<%= post._id %>">
+				<dl class="blog-list">
+					<dd>
+						<h3 class="article-title"><%= post.title %></h3>
+						<div>
+							<span class="a-type">类型：<a href="###"><%= post.type %></a></span>
+							<% if(login_user && (login_user.name == post.name )) { %>
+							<span class="a-operate">[
+								<% if (post.reprint_info.reprint_from) { %>
+									转载-<a  href="/u/<%= post.reprint_info.reprint_from.name %>/<%= post.reprint_info.reprint_from.id %>">原文链接</a>
+								<% } else { %>
+									<a  href="/edit/<%= post.name %>/<%= post._id %>">编辑</a>
+								<% } %>
+								
+								]
+									　[<a id="delete" href="/remove/<%= post.name %>/<%= post._id %>">删除</a>]</span>
+
+							<% } %>
+							<div class="clearfix"></div>
+						</div>
+
+						<div id="a-con">
+							<%- post.post %>
+						</div>
+
+					</dd>
+
+					<div class="article-operate">
+
+						<div id="time">发表时间：<span><%= post.time.minute %></span></div>
+						<ul>
+							<li title="浏览量"><i class="iconfont">&#xe7f7;</i><span>(<%= post.pv %>)</span></li>
+							<li title="评论量">
+								<a href="#comment-form"><i class="iconfont">&#xe600;</i></a><span>(<%= comments_total %>)</span></li>
+							<% var nice_flag = 1 %>
+							<% if(login_user) {%>
+							<% post.nice.forEach(function(value,index){ %>
+							<% if(value.login_user == login_user.name){ %>
+							<% nice_flag = 0 %>
+							<% } %>
+							<% }) %>
+							<% } %>
+							<% if(nice_flag) { %>
+							<li title="赞"><i class="iconfont" id="nice" doc_id="<%= post._id %>">&#xe623;</i>(<span id="niceNum"><%= post.nice.length %></span>)</li>
+							<% } else { %>
+							<li title="已赞"><i class="iconfont" id="nice" doc_id="<%= post._id %>" style="color:#269abc;">&#xe623;</i>(<span id="niceNum"><%= post.nice.length %></span>)</li>
+							<% } %>
+
+							<% var flag = 1 %>
+							<% if(login_user && (login_user.name != post.name)) { %>
+							<% if((post.reprint_info.reprint_form != undefined) && (login_user.name == post.reprint_info.reprint_from.name)) { %>
+							<% flag = 0 %>
+							<% } %>
+							<% if((post.reprint_info.reprint_to != undefined )) { %>
+							<% post.reprint_info.reprint_to.forEach(function(reprint_to,index){ %>
+							<% if(login_user.name == reprint_to.name) { %>
+							<% flag = 0 %>
+							<% } %>
+							<% }) %>
+							<% } %>
+							<% } else { %>
+							<% flag = 0 %>
+							<% } %>
+
+							<% if(flag){ %>
+							<li title="转发量">
+								<a href="/reprint/<%= post.name %>/<%= post._id %>"><i class="iconfont">&#xe601;</i></a><span>(<% if (post.reprint_info.reprint_to) { %>
+																																											<%= post.reprint_info.reprint_to.length %>
+																																											<% } else { %>
+																																												<%= 0 %>
+																																											<% } %>
+																																										)</span></li>
+							<% } else { %>
+							<li title="转发量"><i class="iconfont">&#xe601;</i><span>(<% if (post.reprint_info.reprint_to) { %><%= post.reprint_info.reprint_to.length %><% } else { %><%= 0 %><% } %>)</span></li>
+							<% } %>
+
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</dl>
+			</div>
+		</div>
+		<div class="panel" id="comment">
+			<div class="panel-header">
+				<h3 class="panel-title">查看评论</h3><span style="font-size:14px;line-height:40px;">--共<%= comments_total %>条</span>
+			</div>
+			<div class="panel-body">
+
+				<% comments.forEach(function(comment,index){ %>
+				<dl class="comment">
+					<dt>
+						<img src="<%= comment.head %>">
+					</dt>
+
+					<dd>
+						<div class="com_content">
+							<div class="name_comm"><span class="name"><%= comment.name %> :</span>
+								<%- comment.content %>
+								<% if(login_user && comment.name == login_user.name){ %>
+								<a href="/comment/<%= comment._id %>" class="com_del"><i class="iconfont">&#xe61d;</i></a>
+								<% } %>
+							</div>
+							<div class="clearfix"></div>
+							<div class="time_comm"><span class="time"><%= comment.time %> </span>
+								<% if(login_user && comment.name != login_user.name){ %>
+								<i class="iconfont" reply_id="<%= comment._id %>" name="<%= comment.name %>">&#xe600;</i>
+								<% } %>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<% comment.reply_comments.forEach(function(re_comment,index){ %>
+						<div class="second_com">
+							<span class="sc_face"><img src="<%= re_comment.head %>"></span>
+							<div class="second_com_con com_content">
+								<div class="name_comm"><span class="name"><%= re_comment.name %> 回复  <%= re_comment.reply_name %> :</span>
+									<%- re_comment.content %>
+									<% if(login_user && re_comment.name == login_user.name){ %>
+									<a href="/comment/<%= comment._id %>/<%= re_comment.name %>/<%= re_comment.reply_name %>/<%= re_comment.time %>" class="com_del"><i class="iconfont">&#xe61d;</i></a>
+									<% } %>
+								</div>
+								<div class="clearfix"></div>
+								<div class="time_comm">
+									<span class="time"><%= re_comment.time %> </span>
+									<% if(login_user && re_comment.name != login_user.name){ %>
+									<i class="iconfont" reply_id="<%= comment._id %>" name="<%= re_comment.name %>">&#xe600;</i>
+									<% } %>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<% }) %>
+
+					</dd>
+
+					<div class="clearfix"></div>
+				</dl>
+				<% }) %>
+
+				<div id="num_page">
+					<ul>
+						<% for(var i=1;i<=page_all;i++){%>
+						<% if(page == i  ){ %>
+						<li>
+							<a href="?p=<%= i %>" class="active">
+								<%= i %>
+							</a>
+						</li>
+						<% }else{ %>
+						<li>
+							<a href="?p=<%= i %>">
+								<%= i %>
+							</a>
+						</li>
+						<% } %>
+
+						<% } %>
+						<div class="clearfix"></div>
+					</ul>
+				</div>
+				<% if(error) { %>
+				<%- error %>
+				<% } %>
+
+				<form id="comment-form" method="post" action="">
+					<input type="hidden" id="c-content" name="comm" />
+					<div class="clearfix"></div>
+					<!-- 加载编辑器的容器 -->
+					<script id="editor" name="content" type="text/plain">
+
+					</script>
+					<input id="comment-btn" type="submit" value="发表" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="reply_model" style="width:600px;display:none;">
+		<form class="reply-form" method="post" action="">
+			<input type="hidden" class="reply_content" name="reply_comm" />
+			<input type="hidden" class="reply_name" name="reply_name" />
+			<input type="hidden" class="reply_id" name="reply_id" />
+			<div class="clearfix"></div>
+			<!-- 加载编辑器的容器 -->
+			<script id="editor2" name="content" type="text/plain">
+			</script>
+			<input class="reply-btn" type="submit" value="回复" />
+		</form>
+	</div>
+
+	<%- include myblog_left %>
+
+</div>
+<%- include footer %>
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var ue = UE.getEditor('editor', {
+			toolbars: [
+				['emotion', 'spechars']
+			]
+
+		});
+
+		var ue2 = UE.getEditor('editor2', {
+			toolbars: [
+				['emotion', 'spechars']
+			]
+
+		});
+
+		$('#comment-btn').click(function() {
+			$('#c-content').val(ue.getContent());
+		});
+
+		$('#delete').click(function() {
+			if(!confirm('您确定要删除该篇文章吗？')) {
+				return false;
+			};
+		});
+
+		function trim(str) { //删除左右两端的空格
+			　　
+			return str.replace(/(^\s*)|(\s*$)/g, "");　　
+		};
+		$('#nice').click(function() {
+			if($('#nice').parent().attr('title') == '已赞') {
+				return false;
+			} else {
+				$.ajax({
+					type: "post",
+					url: "/nice",
+					async: true,
+					data: {
+						id: trim($(this).attr("doc_id")),
+					},
+					success: function(res, status, xhr) {
+						if(!res) {
+							alert('请先登录!');
+							location.href = "/login";
+						} else {
+							$('#nice').css('color', '#269ABC');
+							$('#niceNum').html(parseInt($('#niceNum').html()) + 1);
+							$('#nice').parent().attr('title', '已赞');
+						}
+					}
+				});
+			};
+
+		});
+
+		$('#comment-btn').click(function() {
+			if($('#c-content').val() == '') {
+				alert('评论不能为空！');
+				return false;
+			}
+		})
+
+		$('#message-form').dialog({
+			autoOpen: false,
+			height: 300,
+			width: 500,
+			resizable: false,
+			modal: true,
+			closeText: '关闭',
+			hide: 'scale'
+
+		});
+
+		$('#message').click(function() {
+			$('#message-form').dialog('open');
+		});
+
+		$('#friendapply-form').dialog({
+			autoOpen: false,
+			height: 300,
+			width: 440,
+			resizable: false,
+			modal: true,
+			closeText: '关闭',
+			hide: 'scale'
+
+		});
+
+		$('#friend').click(function() {
+			$('#friendapply-form').dialog('open');
+
+		});
+
+		$('.panel-body dl.comment .com_content').hover(function(e) {
+			$(this).children().eq(0).children().eq(2).css("display", "block");
+			$(this).children().eq(2).children().eq(1).css("display", "block");
+			e.stopPropagation();
+		}, function(e) {
+			$(this).children().eq(0).children().eq(2).css("display", "none");
+			$(this).children().eq(2).children().eq(1).css("display", "none");
+			e.stopPropagation();
+		});
+
+		$('.panel-body dl.comment .time_comm i').click(function(e) {
+			$('#reply_model .reply_name').val($(this).attr("name"));
+			$('#reply_model .reply_id').val($(this).attr("reply_id"));
+			$('#reply_container').remove();
+			$(this).parent().after('<div id="reply_container"></div>');
+			$('#reply_container').html($('#reply_model').html());
+			e.stopPropagation();
+			e.preventDefault();
+		})
+
+		$('#main').on('click', '.reply-btn', function(e) {
+			e.stopPropagation();
+			$('.reply_content').val(ue2.getContent());
+			if($('.reply_content').val() == '') {
+				alert('回复不能为空！');
+				return false;
+			}
+		});
+
+		$('#main').on('click', '.edui1', function(e) {
+			e.stopPropagation();
+			e.e.preventDefault();
+			$('#reply_container').css("display", "block");
+		});
+
+		$('body').click(function(e) {
+			e.stopPropagation();
+			//$('#reply_container').remove();
+		});
+
+		$('#num_page ul li a').click(function() {
+			$('#num_page ul li a').removeClass('active');
+			$(this).addClass('active');
+		})
+
+	})
+</script>
+</body>
+
+</html>

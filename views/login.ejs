@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>登录</title>
+		<link rel="stylesheet" href="/stylesheets/smoothness/jquery.ui.css">
+		<link rel="stylesheet" href="/stylesheets/reg-login.css" />
+	</head>
+	<body>
+		<header>
+			<div id="header">
+				<a href="/" class="web-n"><img style="vertical-align:middle;border:none;" src="/images/logo.jpg"></a>
+				
+				<ul class="reg-log">
+					<li>
+						<a class="active">登录</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="/reg">注册</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<% if(error){%>
+			<%- error %>
+		<% } %>
+		<% if(success){%>
+			<%- success %>
+		<% } %>
+		<div id="login">
+			<h2>用户登录</h2>
+			<form  method="post">
+				<label><input type="text" id="user" name="username" placeholder="用户名/邮箱/手机号" /><div class="check-true" ></div></label>
+				<p class="info" id="user-info"></p>
+				<label><input type="password" name="pass" id="pass" placeholder="请输入您密码" /><div class="check-true" ></div></label>
+				<p class="info" id="pass-info"></p>
+				<div class="state-info">
+					<label><input id="read" type="checkbox" name="read" checked="checked"  class="state" />
+					<span id="deal">7天内自动登录</span></label>
+					<span class="deal"><a href="/forget">忘记密码?</a></span>
+					<div class="clearfix"></div>
+				</div>   
+				<label><input type="submit" value="登录" id="submit" /></label>
+			</form>
+			<div id="other-login">
+				<!--
+				<span>第三方账号登录:</span>
+				<ul>
+					<li><a href="###" title="QQ登录"><i class="iconfont">&#xe616;</i></a></li>
+					<li><a href="###" title="微信登录"><i class="iconfont">&#xe6f7;</i></a></li>
+					<li><a href="###" title="新浪微博登录"><i class="iconfont">&#xe653;</i></a></li>
+				</ul>
+				<div class="clearfix"></div>
+				-->
+				<div class="create">没有博客账号? <a href="/reg">立即注册一个</a></span></div>
+			</div>
+		</div>
+		<div class="beian" style="position:fixed; bottom:0;"> Copyright © 2003-2016 <span>蜀ICP备11025334号</span></div>
+		<script src="javascripts/jquery-1.11.0.js"></script>
+		<script src="javascripts/check.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#pass').blur(function(){
+					checkPass($('#pass'), $('#pass-info'));
+				})
+
+				$('#submit').click(function(){
+					checkPass($('#pass'), $('#pass-info'));	
+					if($('#login .error').length==0){
+					}else{
+						alert('注册信息有误！');
+						return false;
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

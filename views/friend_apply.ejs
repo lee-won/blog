@@ -1,0 +1,68 @@
+<%- include header %>
+
+<div id="main">
+	<div class="main-right">
+		<div id="friend_apply">
+			<% friends.forEach(function(friend,index){ %>
+				<div class="apply_list">      
+				<img src="<%= friend.send_head %>">
+				<ul>
+					<li class="name"><%= friend.send_name %></li>
+					<li><%= friend.send_sex %> <%= friend.send_birth %>岁</li>
+					<li><span>附加消息：　</span><%= friend.content %></li>
+				</ul>
+				<div class="apply_oper"><a href="/friend/<%= friend._id %>/agree">同意</a> | <a href="/friend/<%= friend._id %>/remove">拒绝</a></div>
+			</div>
+			<% }) %>
+			
+			
+		</div>
+	</div>
+
+		<%- include person_left %>
+		<div class="clearfix"></div>
+	</div>
+
+	<%- include footer %>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/person.css" />
+	<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+	<script type="text/javascript">
+		$(function() {
+
+			$('#type').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('.type-list').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('#type').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			$('.type-list').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			
+			
+			$("#selectAll").click(function() { //全选  
+			$(".main-right form :checkbox").prop("checked", true);
+			$(".main-right form :checkbox").attr("checked", true);
+		});
+
+		$("#unSelect").click(function() { //全不选  
+			$(".main-right form :checkbox").prop("checked", false);
+			$(".main-right form :checkbox").attr("checked", false);
+		});
+
+		$("#reverse").click(function() { //反选  
+			$(".main-right form :checkbox").each(function() {
+				$(this).prop("checked", !$(this).prop("checked"));
+				$(this).attr("checked", !$(this).attr("checked"));
+			});
+		});
+
+		});
+	</script>
+	</body>
+
+	</html>

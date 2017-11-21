@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/stylesheets/smoothness/jquery.ui.css">
+		<link rel="stylesheet" href="/stylesheets/basic.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/myblog.css" />
+		<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+		<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+			
+	</head>
+
+	<body style="background:#ccc;">
+		<header>
+			<div id="header">
+				<a href="/" class="web-n"><img src="/images/logo.jpg"></a>
+				<nav>
+					<a href="/" >首页</a>
+					<a id="type" >分类</a>
+					<% if(login_user) {%>
+						<a href="/person/<%= login_user.name %>">个人中心</a>
+						<a href="/u/<%= login_user.name %>">我的博客</a>
+					<% } %>
+						
+				</nav>
+				<ul class="reg-log">
+				<% if(login_user) {%>	
+					<li><a href="/logout">退出</a></li>
+					<li>|</li>
+					<li style="font-size:14px;">欢迎回来~ <%= login_user.name %> </li>
+				<% } else {	%>
+					<li><a href="/login">登录</a></li>
+					<li>|</li>
+					<li><a href="/reg">注册</a></li>
+				<% } %>	
+				</ul>
+				<form action="/search" post="get" id="search">
+					<input type="text" name="keyword" placeholder="请输入标题或作者" class="search" />
+					<input type="submit" value="" class="search-btn" />
+				</form>
+
+				<div class="type-list">
+					<ul>
+						<li>
+							<a href="/t/移动开发">移动开发</a>
+						</li>
+						<li>
+							<a href="/t/web前端">web前端</a>
+						</li>
+						<li>
+							<a href="/t/架构设计">架构设计</a>
+						</li>
+						<li>
+							<a href="/t/编程语言">编程语言</a>
+						</li>
+						<li>
+							<a href="/t/互联网">互联网</a>
+						</li>
+						<li>
+							<a href="/t/数据库">数据库</a>
+						</li>
+						<li>
+							<a href="/t/系统运维">系统运维</a>
+						</li>
+						<li>
+							<a href="/t/云计算">云计算</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>

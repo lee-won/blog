@@ -1,0 +1,152 @@
+<%- include header %>
+<%- include mydata %>
+
+
+<div id="main">
+	<div class="main-right">
+		
+
+		<div class="panel">
+			<div class="panel-header">
+				<h3 class="panel-title">修改帖子</h3>
+			</div>
+			<div class="panel-body">
+				<% if (success) { %>
+				<div>
+					<%= success %>
+				</div>
+				<% } %>
+				<% if (error) {%>
+				<script>
+					alert('请先登录')
+				</script>
+				<% } %>
+				<form id="pub-form" method="post">
+					<label class="tit-l">文章标题：<input type="text" id="a-title" name="title" value="<%= post.title %>" /></label>
+					<input id="orgin-type" type="hidden" value="<%= post.type %>" />
+					<label class="type-l">文章标签：<select name="type" id="a-type" > 
+							<option value="移动开发">移动开发</option> 
+							<option value="web前端">web前端</option> 
+							<option value="架构设计">架构设计</option> 
+							<option value="编程语言">编程语言</option> 
+							<option value="互联网">互联网</option>
+							<option value="数据库">数据库</option> 
+							<option value="系统运维">系统运维</option> 
+							<option value="云计算">云计算</option> 
+						</select> </label>
+					<input type="hidden" id="a-content" name="post"  />
+					<div id="a-setcontent" style="display:none;"><%- post.post %></div>
+					<div class="clearfix"></div>
+
+					<script id="editor2" name="content" type="text/plain">
+					
+					</script>
+					<input id="pub-btn" type="submit" value="修改" />
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+	<%- include myblog_left %>
+</div>
+
+<%- include footer %>
+
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/*
+			$('#type').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('.type-list').mouseover(function() {
+				$('.type-list').css('display', 'block')
+			})
+			$('#type').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			$('.type-list').mouseout(function() {
+				$('.type-list').css('display', 'none')
+			})
+			*/
+		var ue = UE.getEditor('editor2');
+		
+		
+		//对编辑器的操作最好在编辑器ready之后再做
+		ue.ready(function() {
+   		 	//设置编辑器的内容
+    		ue.setContent($('#a-setcontent').html());
+   			 //获取html内容，返回: <p>hello</p>
+   			// var html = ue.getContent();
+    		//获取纯文本内容，返回: hello
+   		 	//var txt = ue.getContentTxt();
+		});
+		
+		//初始化数据,读localstroage   
+		//var allData = {};
+		//if(localStorage.getItem('ueditor_content') != null && localStorage.getItem('ueditor_content') != "") {
+			//allData = JSON.parse(localStorage.getItem('ueditor_content'));
+		//}
+
+		//延时加载数据 要等编辑器加载成功，反正我不延时的时候没有成功。  
+		//setTimeout(function() {
+			//ue.setContent(allData)
+		//}, 500);
+
+		//离开页面或者刷新页面触发方法  
+		//window.onbeforeunload = function() {
+			//localStorage.setItem("ueditor_content", JSON.stringify(ue.getContent()));
+		//}
+		$('#pub-btn').click(function() {
+			$('#a-content').val(ue.getContent());
+			if($('#a-title').val() && $('#a-type').val() && $('#a-content').val()) {
+				$('pub-form').submit()
+			} else {
+				alert('亲，存在未填！');
+				return false;
+			}
+		});
+		$("#a-type").val($('#orgin-type').val());  
+		
+				$('#message-form').dialog({
+					autoOpen: false,
+					height: 300,
+					width: 500,
+					resizable: false,
+					modal: true,
+					closeText: '关闭',
+					hide:'scale'
+
+				});
+
+				$('#message').click(function() {
+					$('#message-form').dialog('open');
+				});
+				
+				
+				$('#friendapply-form').dialog({
+					autoOpen: false,
+					height: 300,
+					width: 440,
+					resizable: false,
+					modal: true,
+					closeText: '关闭',
+					hide:'scale'
+
+				});
+
+				$('#friend').click(function() {
+					$('#friendapply-form').dialog('open');
+				});
+        
+    })  
+</script>  
+		
+	});
+</script>
+</body>
+
+</html>

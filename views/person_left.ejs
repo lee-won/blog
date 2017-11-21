@@ -1,0 +1,35 @@
+<div class="main-left">
+	<div id="left-info">个人中心</div>
+	<ul>
+		<li>
+			<a href="/person/<%=login_user.name %>"><i class="iconfont">&#xe602;</i>我的资料</a>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/modify"><i class="iconfont">&#xe660;</i>修改资料</a>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/change_face"><i class="iconfont">&#xe660;</i>更换头像</a>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/inbox"><i class="iconfont">&#xe631;</i>收 件 箱</a>
+			<% if(noread_num){ %>
+				<span class="apply_num" title="未读"><%= noread_num %></span>
+			<% } %>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/outbox"><i class="iconfont">&#xe62e;</i>发 件 箱</a>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/friend"><i class="iconfont">&#xe60c;</i>我的好友</a>
+		</li>
+		<li>
+			<a class="active" href="/person/<%=login_user.name %>/friend_apply"><i class="iconfont">&#xe615;</i>好友申请</a>
+			<% if(apply_num){ %>
+				<span class="apply_num" title="待处理"><%= apply_num %></span>
+			<% } %>
+		</li>
+		<li>
+			<a href="/person/<%=login_user.name %>/post_list"><i class="iconfont">&#xe64b;</i>我的帖子</a>
+		</li>
+	</ul>
+</div>

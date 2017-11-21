@@ -1,0 +1,56 @@
+<%- include header %>
+
+<div id="main">
+	<div class="main-right">
+		<div id="head_thumb"><img src="<%= login_user.head %>" /></div>
+		<form id="change_face" method="post" action="/upload" enctype="multipart/form-data"> 
+			<label><input type="file" id="input_file" name="file"  /></label>
+			<span style="display:block;text-align:center;font-size:12px;color:#666;" >推荐使用100*100像素的图像</span>
+			<label><input type="submit" value="上传" id="submit" /></label>
+		</form>
+		<% if(error) {%>
+		<%- error %>
+		<% } %>
+		<% if(success) {%>
+		<%- success %>
+		<% } %>
+
+	</div>
+
+	<%- include person_left %>
+
+	<div class="clearfix"></div>
+</div>
+
+<%- include footer %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/person.css" />
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.js"></script>
+<script type="text/javascript" src="/javascripts/check.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$('#type').mouseover(function() {
+			$('.type-list').css('display', 'block')
+		})
+		$('.type-list').mouseover(function() {
+			$('.type-list').css('display', 'block')
+		})
+		$('#type').mouseout(function() {
+			$('.type-list').css('display', 'none')
+		})
+		$('.type-list').mouseout(function() {
+			$('.type-list').css('display', 'none')
+		})
+
+		
+
+		
+
+		
+
+	});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<div class="main-left">
+	<div id="date"></div>
+
+	<div class="panel">
+		<div class="panel-header">
+			<h3 class="panel-title">新进博主</h3>
+			<span id="head-more" headPage='1'>换一批</span>
+		</div>
+		<div class="panel-body new_user">
+			<div id="headContent">
+				<% users.forEach(function(user,index) { %>
+
+				<dl class="expert_list">
+					<dt><a href="/u/<%= user.name %>" target="_blank"><img src="<%= user.head %>" alt="img"></a></dt>
+					<dd>
+						<a href="/u/<%= user.name %>" target="_blank" class="expert_t">
+							<%= user.name %>
+						</a>
+					</dd>
+				</dl>
+				<% }) %>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<div class="panel">
+		<div class="panel-header">
+			<h3 class="panel-title">好文推荐</h3>
+		</div>
+		<div class="panel-body good_article">
+			<ul class="list">
+				<% postRec.forEach(function(post,index){ %>
+				<li>
+					<a href="/u/<%= post.name %>/<%= post._id %>">
+						<%= post.title %>
+					</a><span>浏览量(<%= post.pv %>)</span>
+				</li>
+				<% }) %>
+
+			</ul>
+		</div>
+	</div>
+	<div id="adver">
+		<div id="big">
+			<div class="slide" style="opacity:1;"><img src="/images/adv/adv1.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv2.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv3.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv4.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv5.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv6.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv7.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv8.jpg"></div>
+			<div class="slide"><img src="/images/adv/adv9.jpg"></div>
+			<div id="adv-info">web前端开发</div>
+		</div>
+		
+		<div id="thumb">
+			<ul>
+				<li style="border-color: red;">
+					<img src="/images/adv/adv1.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv2.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv3.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv4.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv5.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv6.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv7.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv8.jpg">
+				</li>
+				<li>
+					<img src="/images/adv/adv9.jpg">
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+
+</div>
+<div class="clearfix"></div>
+
